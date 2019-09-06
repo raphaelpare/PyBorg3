@@ -106,7 +106,7 @@ class pyborg:
     import cfgfile
 
     ver_string = "I am a version 1.1.2 PyBorg"
-    saves_version = "1.1.0"
+    saves_version = b"1.1.0"
 
     saving = False
 
@@ -174,7 +174,8 @@ class pyborg:
                 content = self.read_file("version")
                 os.unlink('version')
                 if content != self.saves_version:
-                    print("Error loading dictionary\Please convert it before launching pyborg")
+                    print("Error loading dictionary\Please convert it before launching pyborg", content)
+                    print("Error loading dictionary\Please convert it before launching pyborg", self.saves_version)
                     sys.exit(1)
 
                 content = self.read_file("words.dat")
@@ -356,7 +357,7 @@ class pyborg:
             # single word reply: always output
             if len(message.split()) == 1:
                 io_module.output(message, args)
-                return
+                return message
             # empty. do not output
             if message == "":
                 return
@@ -364,6 +365,7 @@ class pyborg:
             if owner == 0:
                 time.sleep(.2 * len(message))
             io_module.output(message, args)
+            return message
 
     def do_commands(self, io_module, body, args, owner):
         """
