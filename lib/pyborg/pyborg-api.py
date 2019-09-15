@@ -25,4 +25,4 @@ class Pyborg(Resource):
       
 api.add_resource(Pyborg, "/pyborg/<string:msg>")
 
-app.run(debug=True)
+app.run(debug=True,port=6969,host='0.0.0.0')
